@@ -1,0 +1,4 @@
+Menu.cpp: In constructor ‘seneca::MenuItem::MenuItem(const char*, size_t, size_t, int)’:
+Menu.cpp:32:86: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+     if (ut.isspace(content) || indentation > 4 || indentationSize > 4 || rowNumber > MaximumNumberOfMenuItems) {
+                                                                                      ^

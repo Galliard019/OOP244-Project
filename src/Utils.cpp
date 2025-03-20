@@ -14,6 +14,8 @@
 ***********************************************************************/
 #include <iostream>
 #include "Utils.h"
+#include <sstream>
+#include <string>
 using namespace std;
 namespace seneca {
    Utils ut;
@@ -53,6 +55,42 @@ namespace seneca {
          cstring++;
       }
       return cstring && *cstring == 0;
+   }
+
+   int Utils::getInt() {
+      int value;
+      bool valid = false;
+      while (!valid) {
+         string input;
+         getline(cin, input);
+
+         if (input.empty()) {
+            std::cout << "You must enter a value: ";
+            continue;
+         }
+
+         istringstream iss(input);
+         iss >> value;
+
+         if (iss.fail() || !iss.eof()) {
+            std::cout << (iss.fail() ? "Invalid integer: " : "Only an integer please: ");
+            iss.clear();
+         } else {
+            valid = true;
+         }
+      }
+      return value;
+   }
+
+   int Utils::getInt(int min, int max) {
+      int value;
+      do {
+         value = getInt();
+         if (value < min || value > max) {
+            std::cout << "Invalid value: [" << min << " <= value <= " << max << "], try again: ";
+         }
+      } while (value < min || value > max);
+      return value;
    }
 
 }

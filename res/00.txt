@@ -1,0 +1,104 @@
+MenuItem obj_title; // Title of the menu
+    MenuItem obj_exitOption; // Exit option for the menu
+    MenuItem obj_selectionPrompt; // Selection entry prompt for the menu
+
+public:
+    // Constructor with member initializer list
+    Menu(const char* title, const char* exitOption, const char* selectionPrompt)
+        : obj_title(title), obj_exitOption(exitOption), obj_selectionPrompt(selectionPrompt) {
+        // Constructor body (if needed)
+    }
+
+
+    MenuItem* obj_menuItems[MaximumNumberOfMenuItems]{}; // Array of MenuItem pointers
+    size_t obj_menuItemCount{}; // Current count of MenuItem objects
+
+    // Function to add a MenuItem
+    bool addMenuItem(const char* content) {
+        if (obj_menuItemCount < MaximumNumberOfMenuItems) {
+            obj_menuItems[obj_menuItemCount++] = new MenuItem(content);
+            return true;
+        }
+        return false; // Cannot add more MenuItem objects
+    }
+
+    // Destructor to clean up dynamically allocated MenuItem objects
+    ~Menu() {
+        for (size_t i = 0; i < obj_menuItemCount; ++i) {
+            delete obj_menuItems[i];
+        }
+    }
+
+
+    // Constructor with four arguments
+    Menu(const char* title, const char* exitOption = "Exit", size_t indentation = 0, size_t indentationSize = 3)
+        : obj_title(title, indentation, indentationSize),
+          obj_exitOption(exitOption, indentation, indentationSize),
+          obj_selectionPrompt("> ", indentation, indentationSize) {
+        for (size_t i = 0; i < MaximumNumberOfMenuItems; ++i) {
+            obj_menuItems[i] = nullptr;
+        }
+    }
+
+
+    // Overload << operator to add MenuItem objects
+    Menu& operator<<(const char* menuItemContent) {
+        if (obj_menuItemCount < MaximumNumberOfMenuItems) {
+            obj_menuItems[obj_menuItemCount] = new MenuItem(
+                menuItemContent, obj_identationsNum, obj_identationsSize, obj_menuItemCount + 1);
+            ++obj_menuItemCount;
+        }
+        return *this; // Allow chaining
+    }
+
+};
+
+~Menu() {
+        for (size_t i = 0; i < obj_menuItemCount; ++i) {
+            delete obj_menuItems[i];
+            obj_menuItems[i] = nullptr; // Set pointer to nullptr after deletion
+        }
+    }
+
+    // Prevent copying and assignment
+    Menu(const Menu& other) = delete; // Delete copy constructor
+    Menu& operator=(const Menu& other) = delete; // Delete copy assignment operator
+
+
+
+    // Method to display the menu and get the user's selection
+    size_t select() const {
+        // Display the title if it exists
+        if (obj_title) {
+            obj_title.display();
+            std::cout << std::endl;
+        }
+
+        // Display all MenuItem objects
+        for (size_t i = 0; i < obj_menuItemCount; ++i) {
+            if (obj_menuItems[i]) {
+                obj_menuItems[i]->display();
+                std::cout << std::endl;
+            }
+        }
+
+        // Display the exit option
+        if (obj_exitOption) {
+            obj_exitOption.display();
+            std::cout << std::endl;
+        }
+
+        // Display the selection prompt
+        if (obj_selectionPrompt) {
+            obj_selectionPrompt.display();
+        }
+
+        // Get and validate user input
+        size_t selection = 0;
+        do {
+            selection = getInt(0, obj_menuItemCount); // Assuming getInt is a utility function
+        } while (selection > obj_menuItemCount);
+
+        return selection;
+    }
+
