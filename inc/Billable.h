@@ -1,5 +1,5 @@
-#ifndef MENU_H
-#define MENU_H
+#ifndef BILLABLE_H
+#define BILLABLE_H
 
 #include <cstddef>
 #include <iostream>
@@ -12,8 +12,8 @@ namespace seneca {
 
 class Billable {
     private:
-        char* m_name;
-        double m_price;
+        char* obj_name;
+        double obj_price;
         
     protected:
         void price(double value);
@@ -38,4 +38,4 @@ class Billable {
 
 } // namespace seneca
 
-#endif // MENU_H
+#endif // BILLABLE_H
