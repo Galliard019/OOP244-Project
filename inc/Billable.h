@@ -31,8 +31,9 @@ class Billable {
         virtual bool ordered() const;
         virtual std::ifstream& read(std::ifstream& file);
 
-        double operator+(double money, const Billable& B);
-        double& operator+=(double& money, const Billable& B);
+        double operator+(double money) const;
+        double& operator+=(double& money) const;
+        operator const char*() const;
 
     };
 

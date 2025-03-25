@@ -6,73 +6,58 @@
 
 
 namespace seneca {
-
-class Billable {
-
-    char* obj_name {
-
-    };
-
-    double obj_price {
-
-    };
         
     
-    void price(double value) {
-
+    void Billable::price(double value) {
+        obj_price = value;
     };
 
-    void name(const char* name){
-
-    };
-
-
-    Billable() {
-
-    };
-
-    Billable(const Billable&) {
-
-    };
-
-    Billable& operator=(const Billable&) {
-
-    };
-
-    ~Billable() {
-
+    void Billable::name(const char* name){
+        ut.alocpy(obj_name, name);
     };
 
 
-    virtual double price() const {
-
+    Billable::Billable() : obj_name(nullptr), obj_price(0.0) {
     };
 
-    virtual std::ostream& print(std::ostream& ostr = std::cout) const {
-
+    Billable::Billable(const Billable& B) : obj_name(nullptr), obj_price(B.obj_price) {
+        if (B.obj_name) {
+            ut.alocpy(obj_name, B.obj_name);
+        }
     };
 
-    virtual bool order() {
+    Billable& Billable::operator=(const Billable& B) {
+        if (this != &B) {
+            obj_price = B.obj_price;
+            ut.alocpy (obj_name, B.obj_name);
+        }
 
+        return *this;
     };
 
-    virtual bool ordered() const {
-
-    };
-
-    virtual std::ifstream& read(std::ifstream& file) {
-
+    Billable::~Billable() {
+        delete[] obj_name;
+        obj_name = nullptr;
     };
 
 
-    double operator+(double money, const Billable& B) {
-
+    double Billable::price() const {
+        return obj_price;
     };
 
-    double& operator+=(double& money, const Billable& B) {
 
+    double Billable::operator+(double money) const {
+        return money + price();
     };
 
-};
+    double& Billable::operator+=(double& money) const {
+        money += price();
+        return money;
+    };
+
+    Billable::operator const char*() const {
+        return obj_name ? obj_name : "";
+    }
+
 
 }

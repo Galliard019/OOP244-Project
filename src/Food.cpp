@@ -3,30 +3,48 @@
 #include "../inc/Utils.h"
 #include "../inc/constants.h"
 #include "../inc/Billable.h"
+#include "../inc/Food.h"
 
 
 
 namespace seneca {
 
-class Food : public Billable {
 
-        bool obj_ordered;
-        bool obj_child;
-        char* obj_customize = nullptr;
+        Food::Food() {
 
+        };
 
-        Food();
-        Food(const Food&);
-        Food& operator=(const Food&);
-        ~Food();
+        Food::Food(const Food&) {
 
-        std::ostream& print(std::ostream& ostr = std::cout) const;
-        bool order();
-        bool ordered() const;
-        std::ifstream& read(std::ifstream& file);
+        };
 
-        double price();
+        Food& Food::operator=(const Food&) {
 
-    };
+        };
+
+        Food::~Food() {
+
+        };
+
+        std::ostream& Food::print(std::ostream& ostr = std::cout) const {
+
+        };
+
+        bool Food::order() {
+
+        };
+
+        bool Food::ordered() const {
+
+        };
+
+        std::ifstream& Food::read(std::ifstream& file) {
+
+        };
+
+        double Food::price() {
+
+        };
+
 
 }

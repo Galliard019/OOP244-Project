@@ -13,15 +13,15 @@ namespace seneca {
 
 class Drink : public Billable {
     private:
-        char* obj_size = nullptr;
+        char obj_size = '/0';
 
     public:
-        std::ostream& print(std::ostream& ostr = std::cout) const;
-        bool order();
-        bool ordered() const;
-        std::ifstream& read(std::ifstream& file);
+        std::ostream& print(std::ostream& ostr = std::cout) const override;
+        bool order() override;
+        bool ordered() const override;
+        std::ifstream& read(std::ifstream& file) override;
 
-        double price();
+        double price() const override;
 
     };
 
