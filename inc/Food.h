@@ -23,12 +23,12 @@ class Food : public Billable {
         Food& operator=(const Food&);
         ~Food();
 
-        std::ostream& print(std::ostream& ostr = std::cout) const;
-        bool order();
-        bool ordered() const;
-        std::ifstream& read(std::ifstream& file);
+        std::ostream& print(std::ostream& ostr = std::cout) const override;
+        bool order() override;
+        bool ordered() const override;
+        std::ifstream& read(std::ifstream& file) override;
 
-        double price();
+        double price() const override;
 
     };
 

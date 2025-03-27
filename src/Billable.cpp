@@ -46,12 +46,12 @@ namespace seneca {
     };
 
 
-    double Billable::operator+(double money) const {
-        return money + price();
+    double operator+(double money, const Billable& B) {
+        return money + B.price();
     };
 
-    double& Billable::operator+=(double& money) const {
-        money += price();
+    double& operator+=(double& money, const Billable& B) {
+        money += B.price();
         return money;
     };
 

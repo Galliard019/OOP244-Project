@@ -14,7 +14,7 @@ namespace seneca {
     
     std::ostream& Drink::print(std::ostream& ostr = std::cout) const {
         ostr << std::left << std::setw(28) << std::setfill('.') 
-             << (obj_name ? obj_name : "Unnamed");
+             << (static_cast<const char*>(*this) ? static_cast<const char*>(*this) : "Unnamed");
 
         // Print size
         if (ordered()) {
@@ -50,9 +50,9 @@ namespace seneca {
         if (file.getline(buffer_name, 256, ',') && file >> buffer_price) {
             file.ignore();
             name(buffer_name);
-            price();
+            Billable::price(buffer_price);
             obj_size = '\0';
-        }
+        }   
 
         return file;
     };
@@ -69,8 +69,5 @@ namespace seneca {
             default: return Billable::price();
         }
     }
-
-    };
-
 
 }
