@@ -1,4 +1,17 @@
-Menu.cpp: In constructor ‘seneca::MenuItem::MenuItem(const char*, size_t, size_t, int)’:
-Menu.cpp:32:86: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-     if (ut.isspace(content) || indentation > 4 || indentationSize > 4 || rowNumber > MaximumNumberOfMenuItems) {
-                                                                                      ^
+In file included from ms3_tester_prof.cpp:18:0:
+Drink.h:16:25: warning: multi-character character constant [-Wmultichar]
+         char obj_size = '/0';
+                         ^
+Drink.h:16:25: warning: overflow in implicit constant conversion [-Woverflow]
+Billable.cpp:3:29: fatal error: ../inc/Billable.h: No such file or directory
+ #include "../inc/Billable.h"
+                             ^
+compilation terminated.
+Drink.cpp:5:26: fatal error: ../inc/Utils.h: No such file or directory
+ #include "../inc/Utils.h"
+                          ^
+compilation terminated.
+Food.cpp:5:26: fatal error: ../inc/Utils.h: No such file or directory
+ #include "../inc/Utils.h"
+                          ^
+compilation terminated.

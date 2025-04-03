@@ -13,7 +13,7 @@ namespace seneca {
 
 class Drink : public Billable {
     private:
-        char obj_size = '/0';
+        char obj_size = '\0';
 
     public:
         std::ostream& print(std::ostream& ostr = std::cout) const override;

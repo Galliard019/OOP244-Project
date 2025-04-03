@@ -1,12 +1,31 @@
 #include <cstddef>
 #include <iostream>
-#include "../inc/Billable.h"
-#include "../inc/constants.h"
+#include "Billable.h"
+#include "constants.h"
 
 
 
 namespace seneca {
         
+    std::ostream& Billable::print(std::ostream& ostr) const {
+        // Provide implementation
+        return ostr;
+    }
+
+    bool Billable::order() {
+        // Provide implementation
+        return false;
+    }
+
+    bool Billable::ordered() const {
+        // Provide implementation
+        return false;
+    }
+
+    std::ifstream& Billable::read(std::ifstream& file) {
+        // Provide implementation
+        return file;
+    }
     
     void Billable::price(double value) {
         obj_price = value;
@@ -44,7 +63,6 @@ namespace seneca {
     double Billable::price() const {
         return obj_price;
     };
-
 
     double operator+(double money, const Billable& B) {
         return money + B.price();

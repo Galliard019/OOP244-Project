@@ -2,10 +2,10 @@
 #include <iomanip>
 #include <iostream>
 #include <fstream>
-#include "../inc/Utils.h"
-#include "../inc/constants.h"
-#include "../inc/Billable.h"
-#include "../inc/Food.h"
+#include "Utils.h"
+#include "constants.h"
+#include "Billable.h"
+#include "Food.h"
 
 
 
@@ -14,20 +14,22 @@ namespace seneca {
 
         Food::Food() {
                 obj_customize = nullptr;
+                obj_ordered = false;
+                obj_child = false;
         };
 
         Food::Food(const Food& F) : obj_ordered(F.obj_ordered), obj_child(F.obj_child) {
-                if(obj_customize) {
-                        ut.alocpy(obj_customize, F.obj_customize);
-                }
+                *this = F;
         };
 
         Food& Food::operator=(const Food& F) {
                 if (this != &F) {
+                        (Billable&) *this = F;
                         ut.alocpy (obj_customize, F.obj_customize);
                         obj_ordered = F.obj_ordered;
                         obj_child = F.obj_child;
                 }
+                return *this;
         };
 
         Food::~Food() {
@@ -35,10 +37,10 @@ namespace seneca {
                 obj_customize = nullptr;
         };
 
-        std::ostream& Food::print(std::ostream& ostr = std::cout) const {
+        std::ostream& Food::print(std::ostream& ostr) const {
                 // Print name
                 ostr << std::left << std::setw(28) << std::setfill('.')
-                     << (static_cast<const char*>(*this) ? static_cast<const char*>(*this) : "Unnamed");
+                     << ((*this) ? (*this) : "Unnamed");
 
                 // Print portion type
                 if (ordered()) {
@@ -60,46 +62,53 @@ namespace seneca {
         };
 
         bool Food::order() {
-            char portion;
-            std::string customization;
-
-            // Display menu for portion selection
-            std::cout << "   Select portion size:\n"
-                      << "      1- Child\n"
-                      << "      2- Adult\n"
-                      << "      0- Back\n"
-                      << "   > ";
-            std::cin >> portion;
-            portion = std::toupper(portion);
-
-            // Handle portion selection
-            if (portion == '0') {
-                obj_ordered = false;
-                delete[] obj_customize;
-                obj_customize = nullptr;
-                return false;
-            }
-
-            if (portion == '1' || portion == '2') {
-                obj_child = (portion == '1');
-                obj_ordered = true;
-            } else {
-                std::cout << "Invalid selection. Order canceled.\n";
-                obj_ordered = false;
-                return false;
-            }
-
-            // Prompt for customization
-            std::cout << "   Special instructions\n   > ";
-            std::cin.ignore(); // Clear input buffer
-            std::getline(std::cin, customization);
-
-            if (customization.empty()) {
-                delete[] obj_customize;
-                obj_customize = nullptr;
-            } else {
-                ut.alocpy(obj_customize, customization.c_str());
-            }
+                char selection;
+                bool valid = false;
+    
+                std::cout << "         Food Size Selection" << std::endl;
+                std::cout << "          1- Adult" << std::endl;
+                std::cout << "          2- Child" << std::endl;
+                std::cout << "          0- Back" << std::endl;
+                std::cout << "         > ";
+                std::cin >> selection;
+    
+                switch (toupper(selection)) {
+                    case '1':
+                        obj_child = false; // Adult portion
+                        obj_ordered = true;
+                        valid = true;
+                        break;
+                    case '2':
+                        obj_child = true; // Child portion
+                        obj_ordered = true;
+                        valid = true;
+                        break;
+                    case '0':
+                        obj_ordered = false; // Back
+                        delete[] obj_customize;
+                        obj_customize = nullptr;
+                        return false;
+                        break;
+                    default:
+                        std::cout << "Invalid selection. Try again." << std::endl;
+                        obj_ordered = false;
+                        break;
+                }
+    
+                if (valid) {
+                    // Prompt for customization
+                    std::string customization;
+                    std::cout << "Special instructions\n> ";
+                    std::cin.ignore(); // Clear input buffer
+                    std::getline(std::cin, customization);
+    
+                    if (customization.empty()) {
+                        delete[] obj_customize;
+                        obj_customize = nullptr;
+                    } else {
+                        ut.alocpy(obj_customize, customization.c_str());
+                    }
+                }
 
             return true;
         };
@@ -112,14 +121,21 @@ namespace seneca {
                 char buffer_name[256];
                 double buffer_price;
 
-                if (file.getline(buffer_name, 256, ',') && file >> buffer_price)  {
-                        file.ignore();
-                        name(buffer_name);
+                file.getline(buffer_name, 256, ',');
+                if (file.fail()) {
+                        return file;
+                } 
+                else {
+                        file >> buffer_price;
+                        file.ignore(1000, '\n');
+                        Billable::name(buffer_name);
                         Billable::price(buffer_price);
 
                         obj_child = false;
                         obj_ordered = false;
+                        delete[] obj_customize;
                         obj_customize = nullptr;
+
                 }
                 return file;
         };
@@ -127,14 +143,11 @@ namespace seneca {
         
 
         double Food::price() const{
-                double priceRT;
-                if (obj_child && obj_ordered) {
-                        priceRT = Billable::price() / 2;
+                if (obj_child && ordered()) {
+                        return Billable::price() / 2;
                 } else {
-                        priceRT = Billable::price();
+                        return Billable::price();
                 }
-
-                return priceRT;
         };
 
 

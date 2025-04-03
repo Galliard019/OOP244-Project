@@ -13,9 +13,9 @@
 ***********************************************************************/
 #include <iostream>
 #include <fstream>
-#include "../inc/Drink.h"
-#include "../inc/Food.h"
-#include "../inc/Billable.h"
+#include "Drink.h"
+#include "Food.h"
+#include "Billable.h"
 using namespace seneca;
 using namespace std;
 
