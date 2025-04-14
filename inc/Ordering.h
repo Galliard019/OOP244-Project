@@ -1,3 +1,18 @@
+/* Citation and Sources...
+Final Project Milestone ms5
+Module: Ordering
+Filename: Ordering.h
+Version 1.0
+Author: João Marcos Freire de Castro, StNo: 173962234, Email: jmfreire-de-castro@myseneca.ca
+Revision History
+-----------------------------------------------------------
+Date       Reason
+2024/04/11 final version
+-----------------------------------------------------------
+I have done all the coding by myself and only copied the code 
+that my professor provided to complete my workshops and assignments.
+-----------------------------------------------------------*/
+
 #ifndef ORDERING_H
 #define ORDERING_H
 
@@ -28,21 +43,24 @@ class Ordering {
 
     public:
 
-        Ordering();
+        Ordering(const char* drinksFile, const char* foodsFile);
         ~Ordering();
 
         std::ostream& billTitle(std::ostream& ostr) const;
-        /* Food();
-        Food(const Food&);
-        Food& operator=(const Food&);
-        ~Food();
+        std::ostream& billFooter(std::ostream& ostr, double totalDue) const;
+        size_t countRecords(const char* file) const;
 
-        std::ostream& print(std::ostream& ostr = std::cout) const override;
-        bool order() override;
-        bool ordered() const override;
-        std::ifstream& read(std::ifstream& file) override;
+        operator bool() const;
+        size_t noOfBillItems() const;
+        bool hasUnsavedBill() const;
 
-        double price() const override; */
+        std::ostream& listFoods(std::ostream& ostr = std::cout) const;
+        std::ostream& listDrinks(std::ostream& ostr = std::cout) const;
+        std::ostream& ListDrinks(std::ostream& ostr = std::cout) const;
+        bool orderFood();
+        bool orderDrink();
+        std::ostream& printBill(std::ostream& ostr) const;
+        void resetBill();
 
     };
 

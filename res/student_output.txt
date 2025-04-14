@@ -1,74 +1,169 @@
-Script started on Mon 17 Mar 2025 01:16:55 PM EDT
-==114827== Memcheck, a memory error detector
-==114827== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
-==114827== Using Valgrind-3.21.0 and LibVEX; rerun with -h for copyright info
-==114827== Command: ms.exe
-==114827== 
-Milestone 2
- 1- Run Test 1
- 2- Run Test 2
- 3- Final Milestone Application Demo
-Exit
-> 1
-   Test 1, Options Menu
- 1- Option A
- 2- Option B
- 3- Option C
- 4- Option D
- 5- Option E
- 6- Option F
- 7- Option G
- 8- Option H
- 9- Option I
-10- Option J
-11- Option K
-12- Option L
-13- Option M
-14- Option N
-15- Option O
-16- Option P
-17- Option Q
-18- Option R
-19- Option S
-20- Option T
-   Return
-   > 0
-Milestone 2
- 1- Run Test 1
- 2- Run Test 2
- 3- Final Milestone Application Demo
-Exit
-> 2
-   Test 2, Selection test
- 1- Option 1
- 2- Option 2 with Submenu
- 3- Option 3
-   Return
-   > 2
- 1- Sub-option 1
- 2- Sub-option 2
-        Back to test 2
-        > 0
-   Test 2, Selection test
- 1- Option 1
- 2- Option 2 with Submenu
- 3- Option 3
-   Return
-   > 0
-Milestone 2
- 1- Run Test 1
- 2- Run Test 2
- 3- Final Milestone Application Demo
-Exit
-> 0
-Have a good day!
-==114827== 
-==114827== HEAP SUMMARY:
-==114827==     in use at exit: 0 bytes in 0 blocks
-==114827==   total heap usage: 82 allocs, 82 frees, 74,591 bytes allocated
-==114827== 
-==114827== All heap blocks were freed -- no leaks are possible
-==114827== 
-==114827== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+Script started on Tue 01 Apr 2025 06:07:43 PM EDT
+==164952== Memcheck, a memory error detector
+==164952== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==164952== Using Valgrind-3.21.0 and LibVEX; rerun with -h for copyright info
+==164952== Command: ms.exe
+==164952== 
+Testing Drink Class=============================
+Drink Tester!
+Pepsi
+Orange Juice
+Pepsi............................   4.50
+Orange Juice.....................   3.50
+Enter the folowing:
+1<ENTER>
+2<ENTER>
+3<ENTER>
+4<ENTER>
+0<ENTER>
+=========>
+         Drink Size Selection
+          1- Small
+          2- Medium
+          3- Larg
+          4- Extra Large
+          0- Back
+         > 1
+Orange Juice................SML..   1.75
+         Drink Size Selection
+          1- Small
+          2- Medium
+          3- Larg
+          4- Extra Large
+          0- Back
+         > 2
+Orange Juice................MID..   2.62
+         Drink Size Selection
+          1- Small
+          2- Medium
+          3- Larg
+          4- Extra Large
+          0- Back
+         > 3
+Orange Juice................LRG..   3.50
+         Drink Size Selection
+          1- Small
+          2- Medium
+          3- Larg
+          4- Extra Large
+          0- Back
+         > 4
+Orange Juice................XLR..   5.25
+         Drink Size Selection
+          1- Small
+          2- Medium
+          3- Larg
+          4- Extra Large
+          0- Back
+         > 0
+Total = 13.12
+Enter the folowing:
+2<ENTER>
+=========>
+         Drink Size Selection
+          1- Small
+          2- Medium
+          3- Larg
+          4- Extra Large
+          0- Back
+         > 2
+Orange Juice................MID..   2.62
+Total = 15.75
 
-Script done on Mon 17 Mar 2025 01:17:15 PM EDT
+Checking Virtuals: 
+Coffee...........................   5.00
+Price: 5.00
+Not Ordered
+Enter the following:
+2<ENTER>
+<ENTER>(only for food)
+=========>
+         Drink Size Selection
+          1- Small
+          2- Medium
+          3- Larg
+          4- Extra Large
+          0- Back
+         > 2
+Ordered
+Testing Food Class=============================
+Food Tester!
+Hamberger
+Cheese Burger
+.................................   0.00
+.................................   0.00
+Enter the folowing:
+1<ENTER>
+well done
+2<ENTER>
+<ENTER>
+0<ENTER>
+=========>
+         Food Size Selection
+          1- Adult
+          2- Child
+          0- Back
+         > 1
+Special instructions
+> well done
+............................Child   0.00
+         Food Size Selection
+          1- Adult
+          2- Child
+          0- Back
+         > 2
+Special instructions
+> 
+............................Adult   0.00
+         Food Size Selection
+          1- Adult
+          2- Child
+          0- Back
+         > 0
+Total = 20.25
+Enter the folowing:
+2<ENTER>
+<ENTER>
+=========>
+         Food Size Selection
+          1- Adult
+          2- Child
+          0- Back
+         > 2
+Special instructions
+> 
+............................Adult   0.00
+Total = 32.25
+
+Checking Virtuals: 
+Poutine.....................Adult   6.00
+Price: 6.00
+Ordered
+Enter the following:
+2<ENTER>
+<ENTER>(only for food)
+=========>
+         Food Size Selection
+          1- Adult
+          2- Child
+          0- Back
+         > 2
+Special instructions
+> 
+Ordered
+drinkout.csv: ==============>
+Coffee...........................   5.00
+<==============
+foodout.csv: ==============>
+Poutine.....................Adult   6.00
+<==============
+==164952== 
+==164952== HEAP SUMMARY:
+==164952==     in use at exit: 0 bytes in 0 blocks
+==164952==   total heap usage: 49 allocs, 49 frees, 126,282 bytes allocated
+==164952== 
+==164952== All heap blocks were freed -- no leaks are possible
+==164952== 
+==164952== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+Script done on Tue 01 Apr 2025 06:08:24 PM EDT

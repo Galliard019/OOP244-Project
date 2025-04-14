@@ -25,6 +25,8 @@ namespace seneca {
       bool isspace(const char* cstring)const;
       int getInt();
       int getInt(int min, int max);
+      char* makeBillFileName(char* filename, size_t billNo)const;
+      std::string trim(const std::string& str);
    };
    extern Utils ut;   // makes the ut object available where Utils.h is included
                      // to call a Utils function call it as follows

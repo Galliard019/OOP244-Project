@@ -1,17 +1,4 @@
-In file included from ms3_tester_prof.cpp:18:0:
-Drink.h:16:25: warning: multi-character character constant [-Wmultichar]
-         char obj_size = '/0';
-                         ^
-Drink.h:16:25: warning: overflow in implicit constant conversion [-Woverflow]
-Billable.cpp:3:29: fatal error: ../inc/Billable.h: No such file or directory
- #include "../inc/Billable.h"
-                             ^
-compilation terminated.
-Drink.cpp:5:26: fatal error: ../inc/Utils.h: No such file or directory
- #include "../inc/Utils.h"
-                          ^
-compilation terminated.
-Food.cpp:5:26: fatal error: ../inc/Utils.h: No such file or directory
- #include "../inc/Utils.h"
-                          ^
-compilation terminated.
+ms4_tester_prof.cpp: In function ‘int main()’:
+ms4_tester_prof.cpp:45:8: error: ‘class seneca::Ordering’ has no member named ‘ListDrinks’
+    ord.ListDrinks();
+        ^

@@ -37,8 +37,8 @@ MenuItem::MenuItem(const char* content, size_t indentation, size_t indentationSi
         obj_menuItemNumber = 0;
 
     } else {
-        
-        obj_menuItemContent = ut.alocpy(content);
+        // std::string trimmedContent = ut.trim(content);
+        obj_menuItemContent = ut.alocpy(content); //trimmedContent.c_str()
 
     }
 
@@ -145,7 +145,8 @@ Menu::Menu(const char* title, const char* exitOption, size_t indentation, size_t
 bool Menu::addMenuItem(const char* content) {
     if (obj_menuItemCount < MaximumNumberOfMenuItems) {
         
-        MenuItems[obj_menuItemCount++] = new MenuItem(content);
+        MenuItems[obj_menuItemCount] = new MenuItem(content, obj_identationsNum, obj_identationsSize, obj_menuItemCount + 1);
+        ++obj_menuItemCount;
         return true;
 
     }
